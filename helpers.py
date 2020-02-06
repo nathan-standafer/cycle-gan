@@ -18,6 +18,8 @@ import numpy as np
 import scipy
 import scipy.misc
 
+import imageio
+
 
 def checkpoint(iteration, G_XtoY, G_YtoX, D_X, D_Y, checkpoint_dir='checkpoints_cyclegan'):
     """Saves the parameters of both generators G_YtoX, G_XtoY and discriminators D_X, D_Y.
@@ -72,10 +74,13 @@ def save_samples(iteration, fixed_Y, fixed_X, G_YtoX, G_XtoY, batch_size=16, sam
     
     merged = merge_images(X, fake_Y, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-X-Y.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    #scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
+
     print('Saved {}'.format(path))
     
     merged = merge_images(Y, fake_X, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-Y-X.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    #scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
